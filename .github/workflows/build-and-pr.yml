@@ -42,7 +42,7 @@ jobs:
           TAG=${GITHUB_SHA::7}
           echo "TAG=${TAG}" >> $GITHUB_ENV
           IMAGE_URI=europe-west1-docker.pkg.dev/${PROJECT_ID}/${REPO}/${IMAGE}:${TAG}
-          docker build -f Dockerfile -t ${IMAGE_URI} .
+          docker build -f src/Dockerfile -t ${IMAGE_URI} .
           docker push ${IMAGE_URI}
 
       - name: Update dev overlay tag
