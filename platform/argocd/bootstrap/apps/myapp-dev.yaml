@@ -12,12 +12,9 @@ spec:
     repoURL: https://github.com/faruk56-arch/gke-gitops-platform.git
     targetRevision: main
     path: apps/myapp/overlays/dev
-    kustomize:
-      buildOptions: "--enable-helm"
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-
