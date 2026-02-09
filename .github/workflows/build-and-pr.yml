@@ -22,6 +22,7 @@ jobs:
       REPO: my-docker
       IMAGE: myapp
 
+      
     steps:
       - uses: actions/checkout@v4
 
