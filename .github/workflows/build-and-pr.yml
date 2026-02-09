@@ -31,6 +31,10 @@ jobs:
         with:
           workload_identity_provider: "projects/903685462877/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
           service_account: "github-ci@project-40cabc90-4d22-4606-b51.iam.gserviceaccount.com"
+      
+      - name: Export Google credentials
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_GHA_CREDS_PATH" >> $GITHUB_ENV
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
