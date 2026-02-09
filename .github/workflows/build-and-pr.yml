@@ -53,11 +53,14 @@ jobs:
       - name: Update dev overlay tag
         run: |
           sed -i "s/tag: \".*\"/tag: \"${TAG}\"/" apps/myapp/overlays/dev/kustomization.yaml
-      
+
       - name: Clean up generated GCP credentials
         run: |
           rm -f gha-creds-*.json
-
+      
+      - name: Ensure workflow files are not modified
+        run: |
+          git restore .github/workflows || true
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v6
