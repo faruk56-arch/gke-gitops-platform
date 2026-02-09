@@ -3,12 +3,13 @@ kind: Kustomization
 
 namespace: myapp
 
+helmGlobals:
+  chartHome: ../../chart
+
 helmCharts:
   - name: myapp
     releaseName: myapp
     namespace: myapp
-    chartHome: ../../chart
-    valuesFile: ../../chart/values.yaml
     valuesInline:
       image:
         tag: "dev"

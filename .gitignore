@@ -29,3 +29,6 @@ dist/
 *.log
 
 gha-creds-*.json
+
+# Local tooling
+bin/kustomize
