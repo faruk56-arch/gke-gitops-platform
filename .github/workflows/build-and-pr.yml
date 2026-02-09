@@ -31,6 +31,7 @@ jobs:
         with:
           workload_identity_provider: "projects/903685462877/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
           service_account: "github-ci@project-40cabc90-4d22-4606-b51.iam.gserviceaccount.com"
+          create_credentials_file: false
       
       - name: Export Google credentials
         run: |
@@ -53,14 +54,6 @@ jobs:
       - name: Update dev overlay tag
         run: |
           sed -i "s/tag: \".*\"/tag: \"${TAG}\"/" apps/myapp/overlays/dev/kustomization.yaml
-
-      - name: Clean up generated GCP credentials
-        run: |
-          rm -f gha-creds-*.json
-      
-      - name: Ensure workflow files are not modified
-        run: |
-          git restore .github/workflows || true
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v6
