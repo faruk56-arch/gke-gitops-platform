@@ -27,3 +27,5 @@ dist/
 
 # Logs
 *.log
+
+gha-creds-*.json

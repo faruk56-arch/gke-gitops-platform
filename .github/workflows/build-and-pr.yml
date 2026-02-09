@@ -55,6 +55,13 @@ jobs:
         run: |
           sed -i "s/tag: \".*\"/tag: \"${TAG}\"/" apps/myapp/overlays/dev/kustomization.yaml
 
+      - name: Disable GCP credential file export
+        run: |
+          unset GOOGLE_APPLICATION_CREDENTIALS
+          unset CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE
+          unset GOOGLE_GHA_CREDS_PATH
+
+
       - name: Create PR
         uses: peter-evans/create-pull-request@v6
         with:
@@ -62,3 +69,4 @@ jobs:
           title: "Deploy myapp:${{ env.TAG }} to dev"
           body: "Automated image update for dev environment."
           branch: "deploy/dev-${{ env.TAG }}"
+          add-paths: "apps/myapp/overlays/dev/kustomization.yaml"
