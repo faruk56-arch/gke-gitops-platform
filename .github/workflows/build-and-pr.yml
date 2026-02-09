@@ -5,7 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "src/**"
-      - "Dockerfile"
+      - "src/Dockerfile"
 
 jobs:
   build:
