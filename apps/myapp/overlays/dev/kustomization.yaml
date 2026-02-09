@@ -13,4 +13,4 @@ helmCharts:
     valuesInline:
       replicaCount: 2
       image:
-        tag: "dev"
+        tag: "3a67d82"
