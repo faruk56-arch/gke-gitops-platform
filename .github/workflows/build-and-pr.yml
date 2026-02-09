@@ -5,7 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "src/**"
-      - "Dockerfile"
+      - "src/Dockerfile"
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
       REPO: my-docker
       IMAGE: myapp
 
-      
+
     steps:
       - uses: actions/checkout@v4
 
