@@ -12,8 +12,6 @@ spec:
     repoURL: https://github.com/faruk56-arch/gke-gitops-platform.git
     targetRevision: main
     path: apps/myapp/overlays/prod
-    kustomize:
-      buildOptions: "--enable-helm"
   syncPolicy:
     automated:
       prune: true
