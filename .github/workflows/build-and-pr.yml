@@ -31,7 +31,7 @@ jobs:
         with:
           workload_identity_provider: "projects/903685462877/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
           service_account: "github-ci@project-40cabc90-4d22-4606-b51.iam.gserviceaccount.com"
-          create_credentials_file: false
+          create_credentials_file: true
       
       - name: Export Google credentials
         run: |
