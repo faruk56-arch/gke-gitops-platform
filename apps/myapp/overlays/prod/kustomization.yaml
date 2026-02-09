@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: myapp
 
 helmGlobals:
-  chartHome: ../../chart
+  chartHome: ../../
 
 helmCharts:
   - name: chart
