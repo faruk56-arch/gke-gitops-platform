@@ -6,10 +6,9 @@ helmGlobals:
   chartHome: ../../
 
 helmCharts:
-  - name: chart
+  - name: myapp
     releaseName: myapp
     namespace: myapp
-    version: 0.1.0
     valuesInline:
       replicaCount: 2
       image:
