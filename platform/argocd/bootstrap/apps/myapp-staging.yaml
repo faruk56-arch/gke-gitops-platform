@@ -5,16 +5,17 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: myapp
+
   source:
     repoURL: https://github.com/faruk56-arch/gke-gitops-platform.git
     targetRevision: main
     path: apps/myapp/overlays/staging
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myapp
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
