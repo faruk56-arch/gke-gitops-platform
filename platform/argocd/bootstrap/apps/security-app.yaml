@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: security
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    repoURL: https://github.com/faruk56-arch/gke-gitops-platform.git
+    targetRevision: main
+    path: platform/security
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

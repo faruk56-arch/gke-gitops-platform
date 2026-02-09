@@ -1,0 +1,9 @@
+image:
+  repository: europe-west1-docker.pkg.dev/project-40cabc90-4d22-4606-b51/my-docker/myapp
+  tag: "0.1.0"
+
+replicaCount: 2
+
+service:
+  port: 80
+  targetPort: 8080

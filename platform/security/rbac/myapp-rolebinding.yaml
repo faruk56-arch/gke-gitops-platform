@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: myapp-read-bind
+  namespace: myapp
+subjects:
+  - kind: ServiceAccount
+    name: myapp-sa
+roleRef:
+  kind: Role
+  name: myapp-read
+  apiGroup: rbac.authorization.k8s.io

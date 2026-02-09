@@ -1,0 +1,4 @@
+loki:
+  auth_enabled: false
+promtail:
+  enabled: true

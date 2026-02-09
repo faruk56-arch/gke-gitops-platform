@@ -1,0 +1,9 @@
+grafana:
+  enabled: true
+  adminPassword: "ChangeMe-Now"
+  service:
+    type: ClusterIP
+
+prometheus:
+  prometheusSpec:
+    retention: 7d

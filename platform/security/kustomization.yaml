@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - rbac/myapp-namespace.yaml
+  - rbac/myapp-sa.yaml
+  - rbac/myapp-role.yaml
+  - rbac/myapp-rolebinding.yaml
+  - networkpolicies/default-deny.yaml
+  - networkpolicies/allow-from-ingress.yaml
+  - networkpolicies/allow-dns.yaml

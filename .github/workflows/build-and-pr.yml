@@ -1,0 +1,60 @@
+name: Build Push and PR
+
+on:
+    push:
+        branches: ["main"]
+        paths:
+            - "src/**"
+            - "src/Dockerfile"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            pull-requests: write
+            id-token: write
+
+        env:
+            REGION: europe-west1
+            PROJECT_ID: 903685462877
+            REPO: my-docker
+            IMAGE: myapp
+
+        steps:
+            - uses: actions/checkout@v4
+
+            # Authenticate to GCP (OIDC recommended)
+            - name: Auth to Google Cloud
+              uses: google-github-actions/auth@v2
+              with:
+                  workload_identity_provider: "projects/903685462877/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+
+                  service_account: "github-ci@903685462877.iam.gserviceaccount.com"
+
+            - name: Setup gcloud
+              uses: google-github-actions/setup-gcloud@v2
+
+            - name: Configure docker
+              run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+            - name: Build and push image
+              run: |
+                  TAG=${GITHUB_SHA::7}
+                  IMAGE_URI=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.IMAGE }}:${TAG}
+                  docker build -f src/Dockerfile -t ${IMAGE_URI} .
+                  docker push ${IMAGE_URI}
+                  echo "TAG=${TAG}" >> $GITHUB_ENV
+
+            # Update GitOps overlay tag (dev example)
+            - name: Update dev overlay tag
+              run: |
+                  sed -i "s/tag: \".*\"/tag: \"${TAG}\"/" apps/myapp/overlays/dev/kustomization.yaml
+
+            - name: Create PR
+              uses: peter-evans/create-pull-request@v6
+              with:
+                  commit-message: "chore: deploy ${IMAGE}:${{ env.TAG }} to dev"
+                  title: "Deploy ${IMAGE}:${{ env.TAG }} to dev"
+                  body: "Automated image update for dev environment."
+                  branch: "deploy/dev-${{ env.TAG }}"
