@@ -4,10 +4,10 @@ kind: Kustomization
 namespace: myapp
 
 helmGlobals:
-  chartHome: ../../chart
+  chartHome: ../../
 
 helmCharts:
-  - name: myapp
+  - name: chart
     releaseName: myapp
     namespace: myapp
     valuesInline:
