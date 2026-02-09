@@ -36,7 +36,7 @@ def root():
     LATENCY.labels(app=APP_NAME, path="/").observe(duration)
     REQUESTS.labels(app=APP_NAME, method="GET", path="/", status=str(status)).inc()
 
-    return {"message": "hello from myapp test test", "latency_s": duration}
+    return {"message": "hello from myapp third test", "latency_s": duration}
 
 @app.get("/metrics")
 def metrics():
