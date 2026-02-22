@@ -12,4 +12,4 @@ helmCharts:
     namespace: myapp
     valuesInline:
       image:
-        tag: "dev"
+        tag: "3a67d82"
